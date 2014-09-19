@@ -1,0 +1,167 @@
+@duration:0.6s;
+@long:0.8s;
+@short:0.3s;
+.transform(@value){
+	transform: @value;
+	-webkit-transform: @value;
+}
+.animation(@value){
+	animation: @value;
+	-webkit-animation: @value;
+}
+.animation-duration(@value){
+	animation-duration: @value;
+	-webkit-animation-duration: @value;
+}
+.animation-name(@value){
+	animation-name: @value;
+	-webkit-animation-name: @value;
+}
+.animation-iteration-count(@value){
+	animation-iteration-count: @value;
+	-webkit-animation-iteration-count: @value;
+}
+.animation-timing-function(@value){
+	animation-timing-function:@value;
+	-webkit-animation-timing-function:@value;
+}
+
+.zuirepeat{
+	.animation-iteration-count(infinite);
+}
+.zuilong{
+	.animation-duration(@long);
+	transition-duration: @long;
+}
+.zuishort{
+	.animation-duration(@short);
+	transition-duration: @short;
+}
+.zuizoomout,.zuizoomin,.zuifadein,.zuifadeout,
+.zuipulse,.zuipulsein,.zuipulseout,
+.zuipush,.zuipop,.zuirotate{
+	box-shadow: 0 0 1px rgba(0,0,0,0);
+	.transform(translateZ(0));
+	transition-duration: @duration;
+	transition-timing-function: ease-out;
+	.animation-duration(@duration);
+	.animation-timing-function(ease-out);
+	.transform(scale(1));
+	opacity: 1;
+}
+.zuizoomout.zuihover:hover, .zuizoomout.zuianimate{
+	.transform(scale(1.2));
+}
+.zuizoomin.zuihover:hover, .zuizoomin.zuianimate{
+	.transform(scale(0.8));
+}
+
+.zuifadein.zuihover:hover, .zuifadein.zuianimate{
+	opacity: 0;
+}
+.zuifadeout{
+	opacity: 0;
+}
+.zuifadeout.zuihover:hover, .zuifadeout.zuianimate{
+	opacity: 1;
+}
+
+.zuipulse.zuihover:hover, .zuipulse.zuianimate{
+	.animation-name(pulse);
+	.animation-iteration-count(infinite);
+	.animation-timing-function(linear);
+}
+@keyframes pulse{
+	from{
+		.transform(scale(1));
+	}
+	35%{
+		.transform(scale(1.1));
+	}
+	50%{
+		.transform(scale(1));
+	}
+	65%{
+		.transform(scale(0.9));
+	}
+	to{
+		.transform(scale(1));
+	}
+}
+
+.zuipulsein.zuihover:hover, .zuipulsein.zuianimate,
+.zuipulseout.zuihover:hover, .zuipulseout.zuianimate{
+	.animation-name(pulsein);
+	.animation-iteration-count(infinite);
+	.animation-timing-function(linear);
+}
+@keyframes pulsein{
+	from{
+		.transform(scale(1));
+	}
+	30%{
+		.transform(scale(0.8));
+	}
+	to{
+		.transform(scale(1));
+	}
+}
+
+.zuipulseout.zuihover:hover, .zuipulseout.zuianimate{
+	.animation-name(pulseout);
+}
+@keyframes pulseout{
+	from{
+		.transform(scale(1));
+	}
+	30%{
+		.transform(scale(1.2));
+	}
+	to{
+		.transform(scale(1));
+	}
+}
+
+
+.zuipush.zuihover:hover, .zuipush.zuianimate,
+.zuipop.zuihover:hover, .zuipop.zuianimate{
+	.animation-name(push);
+	.animation-iteration-count(1);
+	.animation-timing-function(linear);
+	.animation-duration(@short);
+}
+.zuipop.zuihover:hover, .zuipop.zuianimate{
+	.animation-name(pop);
+}
+@keyframes push{
+	from{
+		.transform(scale(1));
+	}
+	70%{
+		.transform(scale(0.8));
+	}
+	to{
+		.transform(scale(1));
+	}
+}
+@keyframes pop{
+	from{
+		.transform(scale(1));
+	}
+	70%{
+		.transform(scale(1.2));
+	}
+	to{
+		.transform(scale(1));
+	}
+}
+
+.zuirotate.zuihover:hover, .zuirotate.zuianimate{
+	.transform(rotate(5deg));
+}
+.zuirotate.zuizoomin.zuihover:hover, .zuirotate.zuizoomin.zuianimate{
+	.transform(rotate(5deg) scale(0.8));
+}
+.zuirotate.zuizoomout.zuihover:hover, .zuirotate.zuizoomout.zuianimate{
+	.transform(rotate(5deg) scale(1.2));
+}
